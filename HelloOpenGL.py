@@ -15,7 +15,7 @@ pygame.display.set_caption('OpenGL in Python')
 def init_ortho(ortho_width, ortho_depth):
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluOrtho2D(0, ortho_width, 0, ortho_depth)
+    gluOrtho2D(0, ortho_width, ortho_depth, 0)  # for have 0 of depth on top
 
 
 def draw_stars(size, color, *args):
@@ -35,7 +35,7 @@ def get_stars_location_by_matrix(ortho, my_matrix):
         for i in range(width_len):
             star_value = my_matrix[j][i]
             if star_value != 0:
-                y = ortho[1] - int((j * ortho[1]) / depth_len)  # inverse depth position
+                y = int((j * ortho[1]) / depth_len)
                 x = int((i * ortho[0]) / width_len)
                 stars.append((x,y))
 
@@ -54,7 +54,7 @@ A = [[0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 0, 0, 1],
     ]
 
-my_ortho = (640, 480)
+my_ortho = (screen_width, screen_height)
 my_stars = get_stars_location_by_matrix(my_ortho, A)
 
 done = False
