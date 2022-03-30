@@ -12,10 +12,10 @@ screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPEN
 pygame.display.set_caption('OpenGL in Python')
 
 
-def init_ortho(ortho_width, ortho_depth):
+def init_ortho():
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluOrtho2D(0, ortho_width, ortho_depth, 0)  # for have 0 of depth on top
+    gluOrtho2D(0, 640, 480, 0)  # for have 0 of depth on top
 
 
 def draw_stars(size, color, *args):
@@ -29,7 +29,7 @@ def draw_stars(size, color, *args):
 
 
 done = False
-init_ortho(*my_ortho)
+init_ortho()
 while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
