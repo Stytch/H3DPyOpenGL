@@ -18,6 +18,16 @@ def init_ortho():
     gluOrtho2D(0, 640, 0, 480)
 
 
+def draw_stars(size, color, *args):
+    glPointSize(size)
+    glColor(*color)
+    glBegin(GL_POINTS)
+    for idx, star_location in enumerate(args):
+        if len(star_location) == 2:
+            glVertex2i(star_location[0], star_location[1])
+    glEnd()
+
+
 done = False
 init_ortho()
 while not done:
@@ -29,11 +39,13 @@ while not done:
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    glPointSize(5)
-    glBegin(GL_POINTS)
-    glVertex2i(100, 50)
-    glVertex2i(630, 450)
-    glEnd()
+    draw_stars(5, [1, 1, 0], *[(100, 50), (630, 450)])
+    draw_stars(10, [1, 0, 0], (23, 40), (212, 350))
+    # glPointSize(5)
+    # glBegin(GL_POINTS)
+    # glVertex2i(100, 50)
+    # glVertex2i(630, 450)
+    # glEnd()
 
     pygame.display.flip()
     pygame.time.wait(100)
