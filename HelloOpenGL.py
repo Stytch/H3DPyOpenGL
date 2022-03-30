@@ -35,21 +35,23 @@ def get_stars_location_by_matrix(ortho, my_matrix):
         for i in range(width_len):
             star_value = my_matrix[j][i]
             if star_value != 0:
-                y = int((j * ortho[1]) / depth_len)
+                y = ortho[1] - int((j * ortho[1]) / depth_len)  # inverse depth position
                 x = int((i * ortho[0]) / width_len)
                 stars.append((x,y))
 
     return stars
 
 
-A = [[0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 1],
+A = [[0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 1, 0],
+    [0, 0, 1, 0, 0, 0, 0, 1],
     ]
 
 my_ortho = (640, 480)
