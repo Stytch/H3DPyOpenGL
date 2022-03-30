@@ -27,35 +27,6 @@ def draw_stars(size, color, *args):
             glVertex2i(star_location[0], star_location[1])
     glEnd()
 
-def get_stars_location_by_matrix(ortho, my_matrix):
-    stars = list()
-    depth_len = len(my_matrix)
-    for j in range(depth_len):
-        width_len = len(my_matrix[j])
-        for i in range(width_len):
-            star_value = my_matrix[j][i]
-            if star_value != 0:
-                y = int((j * ortho[1]) / depth_len)
-                x = int((i * ortho[0]) / width_len)
-                stars.append((x,y))
-
-    return stars
-
-
-A = [[0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 1, 0],
-    [0, 0, 1, 0, 0, 0, 0, 1],
-    ]
-
-my_ortho = (screen_width, screen_height)
-my_stars = get_stars_location_by_matrix(my_ortho, A)
 
 done = False
 init_ortho(*my_ortho)
@@ -68,14 +39,11 @@ while not done:
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    # draw_stars(5, [1, 1, 0], *[(100, 50), (630, 450)])
-    # draw_stars(10, [1, 0, 0], (23, 40), (212, 350))
-    draw_stars(5, [1, 1, 0], *my_stars)
-    # glPointSize(5)
-    # glBegin(GL_POINTS)
-    # glVertex2i(100, 50)
-    # glVertex2i(630, 450)
-    # glEnd()
+    glPointSize(5)
+    glBegin(GL_POINTS)
+    glVertex2i(100, 50)
+    glVertex2i(630, 450)
+    glEnd()
 
     pygame.display.flip()
     pygame.time.wait(100)
