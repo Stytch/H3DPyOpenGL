@@ -26,11 +26,13 @@ def plot_point(my_points):
         glVertex2f(p[0], p[1])
     glEnd()
 
-def plot_lines(my_points):
-    glBegin(GL_LINE_STRIP)
-    for p in my_points:
-        glVertex2f(p[0], p[1])
-    glEnd()
+
+def plot_lines(my_lines):
+    for my_points in my_lines:
+        glBegin(GL_LINE_STRIP)
+        for p in my_points:
+            glVertex2f(p[0], p[1])
+        glEnd()
 
 
 done = False
@@ -59,8 +61,7 @@ while not done:
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    for l in lines:
-        plot_lines(l)
+    plot_lines(lines)
 
     pygame.display.flip()
     pygame.time.wait(10)
