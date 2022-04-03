@@ -60,6 +60,22 @@ def save_drawing(my_lines):
     print("Drawing saved")
 
 
+def load_drawing():
+    f = open("drawing.txt", "r")
+    num_of_lines = int(f.readline())
+    global load_points
+    global load_line
+    load_points = []
+    for l in range(num_of_lines):
+        load_line = []
+        load_points.append(load_line)
+        num_of_coords= int(f.readline())
+        for coord_number in range(num_of_coords):
+            px, py = [float(value) for value in next(f).split()]
+            load_line.append((px,py))
+            print(str(px)+","+str(py))
+    return load_points
+
 
 done = False
 init_ortho()
@@ -74,6 +90,10 @@ while not done:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 save_drawing(lines)
+            elif event.key == pygame.K_l:
+                lines = load_drawing()
+            elif event.key == pygame.K_SPACE:
+                lines = []
         elif mouse_is_down and event.type == MOUSEMOTION:
             p = pygame.mouse.get_pos()
             points.append((map_value(0, screen_width, ortho_left, ortho_right, p[0]),
