@@ -75,8 +75,8 @@ while not done:
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-    #plot_lines(lines)
-    plot_graph()
+    plot_lines(lines)
+    #plot_graph()
 
     pygame.display.flip()
     pygame.time.wait(10)
