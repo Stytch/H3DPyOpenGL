@@ -9,10 +9,10 @@ pygame.init()
 
 screen_width = 800
 screen_height = 800
-ortho_left = 0
-ortho_right = 4
-ortho_top = -1
-ortho_bottom = 1
+ortho_left = -400
+ortho_right = 400
+ortho_top = -400
+ortho_bottom = 400
 
 screen = pygame.display.set_mode((screen_width, screen_height), DOUBLEBUF | OPENGL)
 pygame.display.set_caption('OpenGL in Python')
@@ -49,6 +49,18 @@ def plot_lines(my_lines):
         glEnd()
 
 
+def save_drawing(my_lines):
+    f = open("drawing.txt", "w")
+    f.write(str(len(my_lines)) + "\n")
+    for l in my_lines:
+        f.write(str(len(l)) + "\n")
+        for p in l:
+            f.write(str(p[0])+ " " + str(p[1]) + "\n")
+    f.close()
+    print("Drawing saved")
+
+
+
 done = False
 init_ortho()
 glPointSize(5)
@@ -59,6 +71,9 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                save_drawing(lines)
         elif mouse_is_down and event.type == MOUSEMOTION:
             p = pygame.mouse.get_pos()
             points.append((map_value(0, screen_width, ortho_left, ortho_right, p[0]),
